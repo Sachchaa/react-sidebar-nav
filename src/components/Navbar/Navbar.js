@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import { AiOutlineClose } from 'react-icons/ai'
 import { FaBars } from 'react-icons/fa'
+import { Data } from './Data'
 import {
+    MenuButtonContainer,
+    MenuButton,
     Nav,
     NavbarContainer,
-    NavMobile,
     NavMenu,
     NavItem,
     NavLink
@@ -17,21 +20,29 @@ const Navbar = () => {
     const showSideBar = () => setSidebar(!sidebar)
     return (
         <>
+            <MenuButtonContainer>
+                <MenuButton>
+                    <FaBars onClick={showSideBar} />
+                </MenuButton>
+            </MenuButtonContainer>
             <Nav>
                 <NavbarContainer>
-                    <NavMobile>
-                        <FaBars onClick={showSideBar} />
-                    </NavMobile>
                     <NavMenu>
                         <NavItem>
-                            <NavLink> </NavLink>
+                            <NavLink>
+                                <AiOutlineClose />
+                            </NavLink>
                         </NavItem>
-                        <NavItem>
-                            <NavLink> </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink> </NavLink>
-                        </NavItem>
+                        {Data.map((item, index) => {
+                            return (
+                                <NavItem key={index}>
+                                    <NavLink to={item.path}>
+                                        {item.icon} {''}
+                                        <span>{item.title}</span>
+                                    </NavLink>
+                                </NavItem>
+                            )
+                        })}
                     </NavMenu>
                 </NavbarContainer>
             </Nav>
